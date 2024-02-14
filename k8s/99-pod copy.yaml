@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: content-engine-poda
+  name: content-engine-podb
   labels:
     app: web
 spec:
