@@ -22,7 +22,7 @@ jobs:
         run: |
           mkdir -p ~/.kube
           echo "${{ secrets.KUBE_CONFIG }}" > ~/.kube/config
-      - name: Configure Deployment Secret
+      - name: Configure Deployment Secrets
         run: |
           mkdir -p k8s/ 
           cat <<EOF > k8s/1-secret.yaml
@@ -31,7 +31,7 @@ jobs:
             metadata:
               name: content-engine-secret
           stringData:
-            DJANGO_SECRET_KEY: "${{ secrets.KUBE_CONFIG }}"
+            DJANGO_SECRET_KEY: "${{ secrets.DJANGO_SECRET_KEY }}"
           EOF
       - name: Apply K8s Manifests
         run: |
