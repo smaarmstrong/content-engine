@@ -1,6 +1,11 @@
 name: Sync K8s Rollout
 
 on:
+  push:
+    branches: [main]
+    paths:
+      - 'k8s/**'
+      - .github/workflows/sync-k8s-rollout.yaml
   workflow_dispatch:
 
 
@@ -16,7 +21,18 @@ jobs:
       - name: Configure Kubectl
         run: |
           mkdir -p ~/.kube
-          echo "${{ secrets.KUBE_CONFIG }}" > ~/.kube/config # KUBECONFIG
+          echo "${{ secrets.KUBE_CONFIG }}" > ~/.kube/config
+      - name: Configure Deployment Secret
+        run: |
+          mkdir -p k8s/ 
+          cat <<EOF > k8s/1-secret.yaml
+          apiVersion: v1
+            kind: Secret
+            metadata:
+              name: content-engine-secret
+          stringData:
+            DJANGO_SECRET_KEY: "${{ secrets.KUBE_CONFIG }}"
+          EOF
       - name: Apply K8s Manifests
         run: |
           kubectl apply -f k8s/
