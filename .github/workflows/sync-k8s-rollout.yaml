@@ -38,7 +38,7 @@ jobs:
           kubectl apply -f k8s/
       - name: Trigger K8s Deployment Rollout
         run: |
-          kubectl rollout restart deployments/content-engine/${{ env.DEPLOYMENT_NAME }}
+          kubectl rollout restart deployments/${{ env.DEPLOYMENT_NAME }}
       - name: Verify K8s Deployment Rollout
         run: |
-          kubectl rollout status deployments/content-engine/${{ env.DEPLOYMENT_NAME }}
+          kubectl rollout status deployments/${{ env.DEPLOYMENT_NAME }}
