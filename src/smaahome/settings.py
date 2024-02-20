@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-mb6vyf7a%wwzv32%u-p*i^&2mm*_zd3i7k$jp#4obg=nj@eenc
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True # twingate
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    "landing", 
 ]
 
 MIDDLEWARE = [
@@ -54,7 +55,7 @@ ROOT_URLCONF = 'smaahome.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [ BASE_DIR / "templates" ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
